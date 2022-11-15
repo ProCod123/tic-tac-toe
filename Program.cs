@@ -14,11 +14,11 @@ int Player(){
     else Console.WriteLine("Вы будете ходить первым!");
     return who;
     }
-
+//Делаем ход
 string[] Move(int who, string[] pole){
-    if (who == 0){
+    if (who == 0){     //Ход компьютера
         int x = 0;
-        while (x == 0){
+        while (x == 0){ //Важно проверить номер ячейки ,оно может уже быть использован
             int move = new Random().Next(0,9);
             if (pole[move] == "0" || pole[move] == "X") x = 0;
             else {
@@ -28,7 +28,7 @@ string[] Move(int who, string[] pole){
             }
         }
         }
-    else{
+    else{               //Ход человека. Проверки на правильность нет
         Console.WriteLine("Введите номер поля");
         int move = Convert.ToInt32(Console.ReadLine()) - 1;
         pole[move] = "X";
@@ -37,8 +37,8 @@ string[] Move(int who, string[] pole){
     }
 //Создаем функцию проверки на победу
 string CheckVictory(string[] pole){
-    if (pole[0]==pole[1] && pole[1]==pole[2]) return pole[0];
-    if (pole[3]==pole[4] && pole[4]==pole[5]) return pole[3];
+    if (pole[0]==pole[1] && pole[1]==pole[2]) return pole[0]; //В случае выигрышной комбинации возвращаем значение 
+    if (pole[3]==pole[4] && pole[4]==pole[5]) return pole[3]; 
     if (pole[6]==pole[7] && pole[7]==pole[8]) return pole[6];
     if (pole[0]==pole[3] && pole[3]==pole[6]) return pole[0];
     if (pole[1]==pole[4] && pole[4]==pole[7]) return pole[1];
@@ -55,11 +55,12 @@ void Game(){
     while(i < 9){
         Move(who,pole); // Делаем ход
         PrintPole(pole);
-        if (CheckVictory(pole) == "X"){
+        //После каждого хода выполняем проверку на победителя
+        if (CheckVictory(pole) == "X"){  //Победа человека
             Console.WriteLine("Вы победили!");
             break;
             }
-        if (CheckVictory(pole) == "0"){
+        if (CheckVictory(pole) == "0"){   //Победа компьютера
             Console.WriteLine("Компьютер победил!");
             break;
             }
